@@ -1,6 +1,6 @@
 <?php
 
-namespace Coreproc\HttpClient;
+namespace Coreproc\PesoPay\Sdk;
 
 use GuzzleHttp\Client;
 

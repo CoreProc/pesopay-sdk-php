@@ -6,7 +6,7 @@
  * Time: 5:19 PM
  */
 
-namespace Coreproc\HttpClient;
+namespace Coreproc\PesoPay\Sdk;
 
 class PesoPay
 {
