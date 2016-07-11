@@ -1,6 +1,6 @@
 {
   "name": "coreproc/pesopay-php-sdk",
-  "license": "GNU GPL v3",
+  "license": "proprietary",
   "authors": [
     {
       "name": "Prince John Lansang",
@@ -17,6 +17,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
+    "php": ">=5.5.9",
     "guzzlehttp/guzzle": "^6.2"
   },
   "autoload": {
