@@ -1,0 +1,22 @@
+{
+    "name": "coreproc/pesopay-php-sdk",
+    "license": "\"GNU GPL v3\"",
+    "authors": [
+        {
+            "name": "Prince John Lansang",
+            "email": "princejohn.lansang@coreproc.ph"
+        },
+	{
+            "name": "Jonnel Ivan Bergonia",
+            "email":"ivan.bergonia@coreproc.ph" 
+        },
+	{
+            "name": "Daniel Orencio",
+            "email": "daniel.orencio@coreproc.ph"
+        }
+	],
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    }
+}
