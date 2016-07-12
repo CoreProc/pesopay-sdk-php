@@ -48,10 +48,7 @@ class PesoPayMerchantApiClient
 
     private function initGuzzleClient()
     {
-        $this->guzzleClient = new Client([
-            'base_uri' => $this->testing ? 'https://test.pesopay.com/b2cDemo/eng/merchant/api/orderApi.jsp'
-                : 'https://www.pesopay.com/b2c2/eng/merchant/api/orderApi.jsp'
-        ]);
+        $this->guzzleClient = new Client();
     }
 
     public function forProduction()
@@ -171,8 +168,23 @@ class PesoPayMerchantApiClient
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function execute()
     {
-        $this->guzzleClient->request();
+        $url = $this->testing ? 'https://test.pesopay.com/b2cDemo/eng/merchant/api/orderApi.jsp'
+                : 'https://www.pesopay.com/b2c2/eng/merchant/api/orderApi.jsp';
+
+        $formData = [
+            'form_params' => [
+               'loginId' => $this->loginId,
+               'password' => $this->password
+            ]
+        ];
+
+        $response = $this->guzzleClient->request('POST', $url, $formData);
+
+        return $response;
     }
 }
