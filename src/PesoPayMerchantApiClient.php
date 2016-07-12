@@ -182,9 +182,9 @@ class PesoPayMerchantApiClient
      * @param $testing
      * @return mixed
      */
-    public function getUrl($testing)
+    public function getUrl()
     {
-        return $testing ? $this->testingUrl : $this->prodUrl;
+        return $this->testing ? $this->testingUrl : $this->prodUrl;
     }
 
     /**
@@ -213,7 +213,7 @@ class PesoPayMerchantApiClient
      */
     public function execute()
     {
-        $url = $this->getUrl($this->testing);
+        $url = $this->getUrl();
 
         $formData = [
             'form_params' => [
