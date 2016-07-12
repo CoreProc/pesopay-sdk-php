@@ -46,7 +46,7 @@ class PesoPayDirectClient
     // @var string The base URL for the Pesopay API.
     private $apiUrl;
 
-    public function _construct($debug = false)
+    public function __construct($debug = false)
     {
         $this->initGuzzleClient();
         $this->apiUrl = $debug ? 'https://test.pesopay.com/b2cDemo/eng/directPay/payComp.jsp' : 'https://www.pesopay.com/b2c2/eng/directPay/payComp.jsp';
