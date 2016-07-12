@@ -217,8 +217,13 @@ class PesoPayMerchantApiClient
 
         $formData = [
             'form_params' => [
-               'loginId' => $this->loginId,
-               'password' => $this->password
+               'loginId'    => $this->loginId,
+               'password'   => $this->password,
+               'actionType' => $this->actionType,
+               'orderRef'   => $this->orderRef,
+               'payRef'     => $this->payRef,
+               'amount'     => $this->amount,
+               'merchantId' => $this->merchantId
             ]
         ];
 
