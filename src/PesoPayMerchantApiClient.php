@@ -44,7 +44,7 @@ class PesoPayMerchantApiClient
 
         $this->password = $password;
 
-        $this->merchantId = $this->merchantId;
+        $this->merchantId = $merchantId;
 
         $this->testing = true;
 
