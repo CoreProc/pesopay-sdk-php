@@ -56,7 +56,6 @@ class PesoPayMerchantApiClient
         $this->initGuzzleClient();
     }
 
-
     /**
      *
      */
@@ -228,6 +227,7 @@ class PesoPayMerchantApiClient
         $url = $this->getUrl();
 
         $formData = [
+            'verify'      => false,
             'form_params' => [
                 'loginId'    => $this->loginId,
                 'password'   => $this->password,

@@ -289,7 +289,7 @@ class PesoPayDirectClient
                 'payType'      => $this->payType,
             ];
 
-        return $client->request('POST', $this->apiUrl, array('headers' => $headers, 'form_params' => $params));
+        return $client->request('POST', $this->apiUrl, array('verify' => false, 'headers' => $headers, 'form_params' => $params));
 
     }
 
