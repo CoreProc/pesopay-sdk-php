@@ -58,6 +58,11 @@ class PesoPayDirectClient
         $this->client = new Client();
     }
 
+    public function getApiUrl()
+    {
+        return $this->apiUrl;
+    }
+
     /**
      * @param $apiUrl
      */
