@@ -32,7 +32,11 @@ class PesoPayMerchantApiClient
 
     private $guzzleClient;
 
-    private $testing = true;
+    private $testing;
+
+    private $prodUrl;
+
+    private $testingUrl;
 
     public function _construct($merchantId = null, $loginId=null, $password=null)
     {
@@ -41,6 +45,12 @@ class PesoPayMerchantApiClient
         $this->password = $password;
 
         $this->merchantId = $this->merchantId;
+
+        $this->testing = true;
+
+        $this->prodUrl = 'https://www.pesopay.com/b2c2/eng/merchant/api/orderApi.jsp';
+
+        $this->testingUrl = 'https://test.pesopay.com/b2cDemo/eng/merchant/api/orderApi.jsp';
 
         $this->initGuzzleClient();
     }
@@ -169,12 +179,41 @@ class PesoPayMerchantApiClient
     }
 
     /**
+     * @param $testing
+     * @return mixed
+     */
+    public function getUrl($testing)
+    {
+        return $testing ? $this->testingUrl : $this->prodUrl;
+    }
+
+    /**
+     * @param $prodUrl
+     * @return $this
+     */
+    public function setProdUrl($prodUrl)
+    {
+        $this->prodUrl = $prodUrl;
+
+        return $this;
+    }
+
+    /**
+     * @param $testingUrl
+     * @return $this
+     */
+    public function setTestingUrl($testingUrl)
+    {
+        $this->testingUrl = $testingUrl;
+
+        return $this;
+    }
+    /**
      * @return mixed
      */
     public function execute()
     {
-        $url = $this->testing ? 'https://test.pesopay.com/b2cDemo/eng/merchant/api/orderApi.jsp'
-                : 'https://www.pesopay.com/b2c2/eng/merchant/api/orderApi.jsp';
+        $url = $this->getUrl($this->testing);
 
         $formData = [
             'form_params' => [
