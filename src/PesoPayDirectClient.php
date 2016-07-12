@@ -40,14 +40,8 @@ class PesoPayDirectClient
     // @var string The payment type
     private $payType;
 
-    // @var Client The Guzzle Client object
+    // @var object The Guzzle Client object
     private $client;
-
-    /**
-     *
-     *
-     *
-     */
 
     public function _construct(Client $client)
     {
@@ -254,6 +248,25 @@ class PesoPayDirectClient
 
     public function execute()
     {
+        $client = $this->client;
+
+        $headers = array(); //TODO: Apply acquisition of headers
+        $params  =
+            [
+                'orderRef'     => $this->orderRef,
+                'amount'       => $this->amount,
+                'currCode'     => $this->currCode,
+                'merchantId'   => $this->merchantId,
+                'pMethod'      => $this->pMethod,
+                'epMonth'      => $this->epMonth,
+                'epYear'       => $this->epYear,
+                'cardNo'       => $this->cardNo,
+                'cardHolder'   => $this->cardHolder,
+                'securityCode' => $this->securityCode,
+                'payType'      => $this->payType,
+            ];
+
+        return $client->request('POST', PesoPay::getApiUrl(), array('headers' => $headers, 'form_params' => $params));
 
     }
 
