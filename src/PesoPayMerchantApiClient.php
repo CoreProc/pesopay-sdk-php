@@ -56,11 +56,17 @@ class PesoPayMerchantApiClient
     }
 
 
+    /**
+     *
+     */
     private function initGuzzleClient()
     {
         $this->guzzleClient = new Client();
     }
 
+    /**
+     * @return $this
+     */
     public function forProduction()
     {
         $this->testing = false;
@@ -68,6 +74,9 @@ class PesoPayMerchantApiClient
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function forTesting()
     {
         $this->testing = true;
