@@ -12,20 +12,20 @@ class PesoPay
 {
 
     // @var string The base URL for the Pesopay API.
-    private $apiBaseUrl;
+    public static $apiBaseUrl;
 
     public function _construct($apiBaseUrl = null)
     {
-        $this->apiBaseUrl = $apiBaseUrl;
+        self::$apiBaseUrl = $apiBaseUrl;
     }
 
-    public function getApiUrl()
+    public static function getApiUrl()
     {
-        return $this->apiBaseUrl;
+        return self::$apiBaseUrl;
     }
 
-    public function setApiUrl($apiBaseUrl)
+    public static function setApiUrl($apiBaseUrl)
     {
-        $this->apiBaseUrl = $apiBaseUrl;
+        self::$apiBaseUrl = $apiBaseUrl;
     }
 }
