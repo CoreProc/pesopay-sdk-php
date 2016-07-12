@@ -12,6 +12,7 @@ use GuzzleHttp\Client;
 
 class PesoPayMerchantApiClient
 {
+
     private $loginId;
 
     private $password;
@@ -38,7 +39,7 @@ class PesoPayMerchantApiClient
 
     private $testingUrl;
 
-    public function _construct($merchantId = null, $loginId=null, $password=null)
+    public function __construct($merchantId = null, $loginId = null, $password = null)
     {
         $this->loginId = $loginId;
 
@@ -83,6 +84,7 @@ class PesoPayMerchantApiClient
 
         return $this;
     }
+
     /**
      * @param string $loginId
      */
@@ -217,6 +219,7 @@ class PesoPayMerchantApiClient
 
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -226,13 +229,13 @@ class PesoPayMerchantApiClient
 
         $formData = [
             'form_params' => [
-               'loginId'    => $this->loginId,
-               'password'   => $this->password,
-               'actionType' => $this->actionType,
-               'orderRef'   => $this->orderRef,
-               'payRef'     => $this->payRef,
-               'amount'     => $this->amount,
-               'merchantId' => $this->merchantId
+                'loginId'    => $this->loginId,
+                'password'   => $this->password,
+                'actionType' => $this->actionType,
+                'orderRef'   => $this->orderRef,
+                'payRef'     => $this->payRef,
+                'amount'     => $this->amount,
+                'merchantId' => $this->merchantId
             ]
         ];
 
