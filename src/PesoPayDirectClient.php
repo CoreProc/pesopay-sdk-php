@@ -22,20 +22,8 @@ class PesoPayDirectClient
     // @var string The payment method
     private $pMethod;
 
-    // @var string The card expiry month
-    private $epMonth;
-
-    // @var string The card expiry year
-    private $epYear;
-
-    // @var string The card number
-    private $cardNo;
-
-    // @var string The card holder
-    private $cardHolder;
-
     // @var string The security code
-    private $securityCode;
+    private $secretCode;
 
     // @var string The payment type
     private $payType;
@@ -48,6 +36,7 @@ class PesoPayDirectClient
 
     // @var array The name of the properties used in the API
     private $fillables = [
+        'actionType',
         'orderRef',
         'amount',
         'currCode',
@@ -201,93 +190,22 @@ class PesoPayDirectClient
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCardExpiryMonth()
-    {
-        return $this->epMonth;
-    }
-
-    /**
-     * @param $epMonth
-     * @return $this
-     */
-    public function setCardExpiryMonth($epMonth)
-    {
-        $this->epMonth = $epMonth;
-        return $this;
-    }
 
     /**
      * @return mixed
      */
-    public function getCardExpiryYear()
+    public function getSecretCode()
     {
-        return $this->epYear;
+        return $this->secretCode;
     }
 
     /**
-     * @param $epYear
+     * @param $secureHash
      * @return $this
      */
-    public function setCardExpiryYear($epYear)
+    public function setSecretCode($secretCode)
     {
-        $this->epYear = $epYear;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCardNo()
-    {
-        return $this->cardNo;
-    }
-
-    /**
-     * @param $cardNo
-     * @return $this
-     */
-    public function setCardNo($cardNo)
-    {
-        $this->cardNo = $cardNo;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCardHolder()
-    {
-        return $this->cardHolder;
-    }
-
-    /**
-     * @param $cardHolder
-     * @return $this
-     */
-    public function setCardHolder($cardHolder)
-    {
-        $this->cardHolder = $cardHolder;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCardSecurityCode()
-    {
-        return $this->securityCode;
-    }
-
-    /**
-     * @param $securityCode
-     * @return $this
-     */
-    public function setCardSecurityCode($securityCode)
-    {
-        $this->securityCode = $securityCode;
+        $this->secretCode = secretCode;
         return $this;
     }
 
