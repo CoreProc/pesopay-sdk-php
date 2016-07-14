@@ -227,24 +227,33 @@ class PesoPayDirectClient
         return $this;
     }
 
+    private function generateSecureHash()
+    {
+        return sha1($this->merchantId . '|' .
+            $this->orderRef . '|' .
+            $this->currCode . '|' .
+            $this->amount . '|' .
+            $this->payType . '|' .
+            $this->secretCode);
+    }
+
     public function execute()
     {
         $client = $this->client;
 
         $headers = array(); //TODO: Apply acquisition of headers
-        $params  =
+
+        $secureHash = $this->generateSecureHash();
+
+        $params =
             [
-                'orderRef'     => $this->orderRef,
-                'amount'       => $this->amount,
-                'currCode'     => $this->currCode,
-                'merchantId'   => $this->merchantId,
-                'pMethod'      => $this->pMethod,
-                'epMonth'      => $this->epMonth,
-                'epYear'       => $this->epYear,
-                'cardNo'       => $this->cardNo,
-                'cardHolder'   => $this->cardHolder,
-                'securityCode' => $this->securityCode,
-                'payType'      => $this->payType,
+                'orderRef'   => $this->orderRef,
+                'amount'     => $this->amount,
+                'currCode'   => $this->currCode,
+                'merchantId' => $this->merchantId,
+                'pMethod'    => $this->pMethod,
+                'secureHash' => $secureHash,
+                'payType'    => $this->payType,
             ];
 
         return $client->request('POST', $this->apiUrl, array('verify' => false, 'headers' => $headers, 'form_params' => $params));
