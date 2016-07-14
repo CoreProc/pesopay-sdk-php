@@ -46,6 +46,7 @@ class PesoPayDirectClient
     // @var string The base URL for the Pesopay API.
     private $apiUrl;
 
+    // @var array The name of the properties used in the API
     private $fillables = [
         'orderRef',
         'amount',
