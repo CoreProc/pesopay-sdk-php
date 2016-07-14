@@ -43,7 +43,14 @@ class PesoPayDirectClient
     // @var string The redirect URL when the transaction is canceled.
     private $cancelUrl;
 
+    // @var string The hash computed
     private $secureHash;
+
+    //@var string If you want to disable the print button, use the 'no' value
+    private $print;
+
+    //@var int Seconds before redirecting to the fail or success page
+    private $redirect;
 
     // @var array The name of the properties used in the API
     private $fillables = [
@@ -56,7 +63,9 @@ class PesoPayDirectClient
         'payType',
         'successUrl',
         'failUrl',
-        'cancelUrl'
+        'cancelUrl',
+        'print',
+        'redirect'
     ];
 
 
@@ -82,8 +91,10 @@ class PesoPayDirectClient
      *         'merchantId'         => 18064182,
      *         'secretCode'         => 'A5PNa2owJZEm20PI2gf0yyg5gAS3toig',
      *         'payType'            => 'N',
-     *         'successUrl'         => 'http://google.com'
-     *         'failUrl'            => 'http://youtube.com'
+     *         'successUrl'         => 'http://google.com',
+     *         'failUrl'            => 'http://youtube.com',
+     *         'print'              => 'no',
+     *         'redirect'           => 0
      *     ], true);
      *
      * $client->generateHtml();
@@ -99,6 +110,9 @@ class PesoPayDirectClient
     {
         $this->initGuzzleClient();
 
+        $this->redirect = 0;
+
+        $this->print = 'no';
         // Assign params to their proper properties
         $this->initParams($params);
 
@@ -334,30 +348,30 @@ class PesoPayDirectClient
             $this->secretCode);
     }
 
-//    public function execute()
-//    {
-//        $client = $this->client;
-//
-//        $headers = array(); //TODO: Apply acquisition of headers
-//
-//        $this->generateSecureHash();
-//
-//        $params =
-//            [
-//                'orderRef'   => $this->orderRef,
-//                'amount'     => $this->amount,
-//                'currCode'   => $this->currCode,
-//                'merchantId' => $this->merchantId,
-//                'secureHash' => $this->secureHash,
-//                'payType'    => $this->payType,
-//                'successUrl' => $this->successUrl,
-//                'failUrl'    => $this->failUrl,
-//                'cancelUrl'  => $this->cancelUrl,
-//            ];
-//
-//        return $client->request('POST', $this->apiUrl, array('verify' => false, 'headers' => $headers, 'form_params' => $params));
-//
-//    }
+    public function execute()
+    {
+        $client = $this->client;
+
+        $headers = array(); //TODO: Apply acquisition of headers
+
+        $this->generateSecureHash();
+
+        $params =
+            [
+                'orderRef'   => $this->orderRef,
+                'amount'     => $this->amount,
+                'currCode'   => $this->currCode,
+                'merchantId' => $this->merchantId,
+                'secureHash' => $this->secureHash,
+                'payType'    => $this->payType,
+                'successUrl' => $this->successUrl,
+                'failUrl'    => $this->failUrl,
+                'cancelUrl'  => $this->cancelUrl,
+            ];
+
+        return $client->request('POST', $this->apiUrl, array('verify' => false, 'headers' => $headers, 'form_params' => $params));
+
+    }
 
     public function generateHtml($isAutoSubmit=true)
     {
@@ -372,6 +386,8 @@ class PesoPayDirectClient
         $successUrlHtml = '<div><input type="text" name="successUrl" value="'.$this->successUrl.'"></div>';
         $failUrlHtml    = '<div><input type="text" name="failUrl" value="'.$this->failUrl.'"></div>';
         $cancelUrlHtml  = '<div><input type="text" name="cancelUrl" value="'.$this->cancelUrl.'"></div>';
+        $needPrintHtml  = '<div><input type="text" name="print" value="'.$this->print.'"></div>';
+        $redirectHtml   = '<div><input type="text" name="redirect" value="'.$this->redirect.'"></div>';
 
         $hidden = $isAutoSubmit ? 'hidden' : "";
         $form = "
@@ -386,6 +402,8 @@ class PesoPayDirectClient
                     $successUrlHtml
                     $failUrlHtml
                     $cancelUrlHtml
+                    $needPrintHtml
+                    $redirectHtml
                     <input type='submit' value='submit'>
                 </form>
             </div>
@@ -401,6 +419,38 @@ class PesoPayDirectClient
         return "
             <script>document.getElementById('pesopay-client-form').submit();</script>
         ";
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRedirect()
+    {
+        return $this->redirect;
+    }
+
+    /**
+     * @param mixed $redirect
+     */
+    public function setRedirect($redirect)
+    {
+        $this->redirect = $redirect;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrint()
+    {
+        return $this->print;
+    }
+
+    /**
+     * @param mixed $print
+     */
+    public function setPrint($print)
+    {
+        $this->print = $print;
     }
 
 }
