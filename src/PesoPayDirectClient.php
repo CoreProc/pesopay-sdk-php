@@ -98,6 +98,7 @@ class PesoPayDirectClient
      *     ], true);
      *
      * $client->generateHtml();
+     * 
      * If you want to display the form, pass the false as an argument to generateHtml function
      *
      * PesoPayDirectClient configuration settings include the following options:
@@ -346,31 +347,6 @@ class PesoPayDirectClient
             $this->amount . '|' .
             $this->payType . '|' .
             $this->secretCode);
-    }
-
-    public function execute()
-    {
-        $client = $this->client;
-
-        $headers = array(); //TODO: Apply acquisition of headers
-
-        $this->generateSecureHash();
-
-        $params =
-            [
-                'orderRef'   => $this->orderRef,
-                'amount'     => $this->amount,
-                'currCode'   => $this->currCode,
-                'merchantId' => $this->merchantId,
-                'secureHash' => $this->secureHash,
-                'payType'    => $this->payType,
-                'successUrl' => $this->successUrl,
-                'failUrl'    => $this->failUrl,
-                'cancelUrl'  => $this->cancelUrl,
-            ];
-
-        return $client->request('POST', $this->apiUrl, array('verify' => false, 'headers' => $headers, 'form_params' => $params));
-
     }
 
     public function generateHtml($isAutoSubmit=true)
