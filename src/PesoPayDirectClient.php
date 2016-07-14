@@ -34,6 +34,15 @@ class PesoPayDirectClient
     // @var string The base URL for the Pesopay API.
     private $apiUrl;
 
+    // @var string The redirect URL when the transaction is successful.
+    private $successUrl;
+
+    // @var string The redirect URL when the transaction fails.
+    private $failUrl;
+
+    // @var string The redirect URL when the transaction is canceled.
+    private $cancelUrl;
+
     // @var array The name of the properties used in the API
     private $fillables = [
         'actionType',
@@ -43,7 +52,10 @@ class PesoPayDirectClient
         'merchantId',
         'pMethod',
         'secretCode',
-        'payType'
+        'payType',
+        'successUrl',
+        'failUrl',
+        'cancelUrl'
     ];
 
 
@@ -226,12 +238,12 @@ class PesoPayDirectClient
     }
 
     /**
-     * @param $secureHash
+     * @param $secretCode
      * @return $this
      */
     public function setSecretCode($secretCode)
     {
-        $this->secretCode = secretCode;
+        $this->secretCode = $secretCode;
         return $this;
     }
 
@@ -250,6 +262,60 @@ class PesoPayDirectClient
     public function setPayType($payType)
     {
         $this->payType = $payType;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSuccessUrl()
+    {
+        return $this->successUrl;
+    }
+
+    /**
+     * @param $successUrl
+     * @return $this
+     */
+    public function setSuccessUrl($successUrl)
+    {
+        $this->successUrl = $successUrl;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFailUrl()
+    {
+        return $this->failUrl;
+    }
+
+    /**
+     * @param $failUrl
+     * @return $this
+     */
+    public function setFailUrl($failUrl)
+    {
+        $this->failUrl = $failUrl;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCancelUrl()
+    {
+        return $this->cancelUrl;
+    }
+
+    /**
+     * @param $cancelUrl
+     * @return $this
+     */
+    public function setCancelUrl($cancelUrl)
+    {
+        $this->cancelUrl = $cancelUrl;
         return $this;
     }
 
@@ -280,6 +346,9 @@ class PesoPayDirectClient
                 'pMethod'    => $this->pMethod,
                 'secureHash' => $secureHash,
                 'payType'    => $this->payType,
+                'successUrl' => $this->successUrl,
+                'failUrl'    => $this->failUrl,
+                'cancelUrl'  => $this->cancelUrl,
             ];
 
         return $client->request('POST', $this->apiUrl, array('verify' => false, 'headers' => $headers, 'form_params' => $params));
