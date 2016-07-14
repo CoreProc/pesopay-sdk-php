@@ -360,15 +360,15 @@ class PesoPayDirectClient
     {
         $this->generateSecureHash();
 
-        $orderRefHtml = '<div><input type="text" name="orderRef" value="'.$this->orderRef.'"></div>';
-        $amountHtml = '<div><input type="text" name="amount" value="'.$this->amount.'"></div>';
-        $currCodeHtml = '<div><input type="text" name="currCode" value="'.$this->currCode.'"></div>';
+        $orderRefHtml   = '<div><input type="text" name="orderRef" value="'.$this->orderRef.'"></div>';
+        $amountHtml     = '<div><input type="text" name="amount" value="'.$this->amount.'"></div>';
+        $currCodeHtml   = '<div><input type="text" name="currCode" value="'.$this->currCode.'"></div>';
         $merchantIdHtml = '<div><input type="text" name="merchantId" value="'.$this->merchantId.'"></div>';
         $secureHashHtml = '<div><input type="text" name="secureHash" value="'.$this->secureHash.'"></div>';
-        $payTypeHtml = '<div><input type="text" name="payType" value="'.$this->payType.'"></div>';
+        $payTypeHtml    = '<div><input type="text" name="payType" value="'.$this->payType.'"></div>';
         $successUrlHtml = '<div><input type="text" name="successUrl" value="'.$this->successUrl.'"></div>';
-        $failUrlHtml = '<div><input type="text" name="failUrl" value="'.$this->failUrl.'"></div>';
-        $cancelUrlHtml = '<div><input type="text" name="cancelUrl" value="'.$this->cancelUrl.'"></div>';
+        $failUrlHtml    = '<div><input type="text" name="failUrl" value="'.$this->failUrl.'"></div>';
+        $cancelUrlHtml  = '<div><input type="text" name="cancelUrl" value="'.$this->cancelUrl.'"></div>';
 
         $form = "
             <form id= \"pesopay-client-form\" action=\"$this->apiUrl\" method=\"POST\">
