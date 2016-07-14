@@ -52,7 +52,6 @@ class PesoPayDirectClient
         'amount',
         'currCode',
         'merchantId',
-        'pMethod',
         'secretCode',
         'payType',
         'successUrl',
@@ -82,9 +81,11 @@ class PesoPayDirectClient
      *         'currCode'           => 608,
      *         'merchantId'         => 18064182,
      *         'secretCode'         => 'A5PNa2owJZEm20PI2gf0yyg5gAS3toig',
-     *         'pMethod'            => 'CC',
      *         'payType'            => 'N',
      *     ], true);
+     *
+     * $client->generateHtml();
+     * If you want to display the form, pass the false as an argument to generateHtml function
      *
      * PesoPayDirectClient configuration settings include the following options:
      *
@@ -370,19 +371,22 @@ class PesoPayDirectClient
         $failUrlHtml    = '<div><input type="text" name="failUrl" value="'.$this->failUrl.'"></div>';
         $cancelUrlHtml  = '<div><input type="text" name="cancelUrl" value="'.$this->cancelUrl.'"></div>';
 
+        $hidden = $isAutoSubmit ? 'hidden' : "";
         $form = "
-            <form id= \"pesopay-client-form\" action=\"$this->apiUrl\" method=\"POST\">
-                $orderRefHtml
-                $amountHtml
-                $currCodeHtml
-                $merchantIdHtml
-                $secureHashHtml
-                $payTypeHtml
-                $successUrlHtml
-                $failUrlHtml
-                $cancelUrlHtml
-                <input type='submit' value='submit'>
-            </form>
+            <div $hidden>
+                <form id= \"pesopay-client-form\" action=\"$this->apiUrl\" method=\"POST\">
+                    $orderRefHtml
+                    $amountHtml
+                    $currCodeHtml
+                    $merchantIdHtml
+                    $secureHashHtml
+                    $payTypeHtml
+                    $successUrlHtml
+                    $failUrlHtml
+                    $cancelUrlHtml
+                    <input type='submit' value='submit'>
+                </form>
+            </div>
         ";
 
         $finalForm = ($isAutoSubmit) ? $form.$this->generateAutoSubmit() : $form;
@@ -390,10 +394,10 @@ class PesoPayDirectClient
 
     }
 
-    public function generateAutoSubmit()
+    private function generateAutoSubmit()
     {
         return "
-            document.getElementById('pesopay-client-form').submit();
+            <script>document.getElementById('pesopay-client-form').submit();</script>
         ";
     }
 
