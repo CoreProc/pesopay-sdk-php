@@ -61,11 +61,11 @@ class PesoPayDirectClient
         'payType'
     ];
 
+
     /**
      * PesoPayDirectClient constructor.
      * @param bool $useTestUrl
      * @param array $params
-     * @internal param bool $debug
      */
     public function __construct($useTestUrl = false, array $params = [])
     {
@@ -93,7 +93,7 @@ class PesoPayDirectClient
     public function initParams(array $params = [])
     {
         foreach ($params as $key => $value) {
-            if (array_key_exists($key, $this->fillables)) {
+            if (in_array($key, $this->fillables)) {
                 $this->{$key} = $value;
             }
         }
