@@ -4,9 +4,8 @@ namespace Coreproc\PesoPay\Sdk;
 
 use GuzzleHttp\Client;
 
-class PesoPayDirectClient
+class PesoPayClientPostThrough
 {
-
     // @var string The order reference number
     private $orderRef;
 
@@ -54,7 +53,6 @@ class PesoPayDirectClient
 
     // @var array The name of the properties used in the API
     private $fillables = [
-        'actionType',
         'orderRef',
         'amount',
         'currCode',
@@ -70,9 +68,9 @@ class PesoPayDirectClient
 
 
     /**
-     * PesoPayDirectClient constructor.
+     * PesoPayClientPostThrough constructor.
      *
-     * PesoPayDirectClient accept an array of constructor parameters
+     * PesoPayClientPostThrough accept an array of constructor parameters
      * and an optional testing environment boolean parameter
      *
      * Here's an example of creating a PesoPayDirectClient
@@ -83,8 +81,7 @@ class PesoPayDirectClient
      * Second parameter is optional and will activate the debug url if set to true
      * Otherwise it defaults to false and will use the live url
      *
-     *     $client = new PesoPayDirectClient([
-     *         'actionType'         => 'Capture',
+     *     $client = new PesoPayClientPostThrough([
      *         'orderRef'           => 1234523,
      *         'amount'             => 1000,
      *         'currCode'           => 608,
@@ -98,10 +95,10 @@ class PesoPayDirectClient
      *     ], true);
      *
      * $client->generateHtml();
-     * 
+     *
      * If you want to display the form, pass the false as an argument to generateHtml function
      *
-     * PesoPayDirectClient configuration settings include the following options:
+     * PesoPayClientPostThrough configuration settings include the following options:
      *
      * @param array $params
      * @param bool $useTestUrl
