@@ -46,18 +46,61 @@ class PesoPayDirectClient
     // @var string The base URL for the Pesopay API.
     private $apiUrl;
 
-    public function __construct($debug = false)
+    private $fillables = [
+        'orderRef',
+        'amount',
+        'currCode',
+        'merchantId',
+        'pMethod',
+        'epMonth',
+        'epYear',
+        'cardNo',
+        'cardHolder',
+        'securityCode',
+        'payType'
+    ];
+
+    /**
+     * PesoPayDirectClient constructor.
+     * @param bool $useTestUrl
+     * @param array $params
+     * @internal param bool $debug
+     */
+    public function __construct($useTestUrl = false, array $params = [])
     {
         $this->initGuzzleClient();
-        $this->apiUrl = $debug ? 'https://test.pesopay.com/b2cDemo/eng/directPay/payComp.jsp' : 'https://www.pesopay.com/b2c2/eng/directPay/payComp.jsp';
+
+        // Assign params to their proper properties
+        $this->initParams($params);
+
+        // Assigns testing url when $useTestUrl is true
+        $this->apiUrl = $useTestUrl ? 'https://test.pesopay.com/b2cDemo/eng/directPay/payComp.jsp' : 'https://www.pesopay.com/b2c2/eng/directPay/payComp.jsp';
 
     }
 
+    /**
+     *
+     */
     private function initGuzzleClient()
     {
         $this->client = new Client();
     }
 
+    /**
+     * @param array $params
+     */
+    public function initParams(array $params = [])
+    {
+        foreach ($params as $key => $value) {
+            if (array_key_exists($key, $this->fillables)) {
+                $this->{$key} = $value;
+            }
+        }
+    }
+
+    /**
+     * @return string
+     */
     public function getApiUrl()
     {
         return $this->apiUrl;
