@@ -67,7 +67,7 @@ class PesoPayDirectClient
      * @param bool $useTestUrl
      * @param array $params
      */
-    public function __construct($useTestUrl = false, array $params = [])
+    public function __construct(array $params = [], $useTestUrl = false)
     {
         $this->initGuzzleClient();
 
