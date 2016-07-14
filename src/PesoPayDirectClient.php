@@ -356,7 +356,7 @@ class PesoPayDirectClient
 //
 //    }
 
-    public function generateHtml()
+    public function generateHtml($isAutoSubmit=true)
     {
         $this->generateSecureHash();
 
@@ -371,7 +371,7 @@ class PesoPayDirectClient
         $cancelUrlHtml = '<div><input type="text" name="cancelUrl" value="'.$this->cancelUrl.'"></div>';
 
         $form = "
-            <form action=\"$this->apiUrl\" method=\"POST\">
+            <form id= \"pesopay-client-form\" action=\"$this->apiUrl\" method=\"POST\">
                 $orderRefHtml
                 $amountHtml
                 $currCodeHtml
@@ -385,9 +385,16 @@ class PesoPayDirectClient
             </form>
         ";
 
-        return $form;
+        $finalForm = ($isAutoSubmit) ? $form.$this->generateAutoSubmit() : $form;
+        return $finalForm;
 
     }
 
+    public function generateAutoSubmit()
+    {
+        return "
+            document.getElementById('pesopay-client-form').submit();
+        ";
+    }
 
 }
