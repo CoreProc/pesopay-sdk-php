@@ -53,11 +53,7 @@ class PesoPayDirectClient
         'currCode',
         'merchantId',
         'pMethod',
-        'epMonth',
-        'epYear',
-        'cardNo',
-        'cardHolder',
-        'securityCode',
+        'secretCode',
         'payType'
     ];
 
