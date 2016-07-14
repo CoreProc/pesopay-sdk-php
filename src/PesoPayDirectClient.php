@@ -75,7 +75,7 @@ class PesoPayDirectClient
         $this->initParams($params);
 
         // Assigns testing url when $useTestUrl is true
-        $this->apiUrl = $useTestUrl ? 'https://test.pesopay.com/b2cDemo/eng/directPay/payComp.jsp' : 'https://www.pesopay.com/b2c2/eng/directPay/payComp.jsp';
+        $this->apiUrl = $useTestUrl ? 'https://test.pesopay.com/b2cDemo/eng/payment/payForm.jsp' : 'https://www.pesopay.com/b2c2/eng/payment/payForm.jsp';
 
     }
 
