@@ -82,6 +82,8 @@ class PesoPayDirectClient
      *         'merchantId'         => 18064182,
      *         'secretCode'         => 'A5PNa2owJZEm20PI2gf0yyg5gAS3toig',
      *         'payType'            => 'N',
+     *         'successUrl'         => 'http://google.com'
+     *         'failUrl'            => 'http://youtube.com'
      *     ], true);
      *
      * $client->generateHtml();
