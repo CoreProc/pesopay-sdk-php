@@ -49,8 +49,34 @@ class PesoPayDirectClient
 
     /**
      * PesoPayDirectClient constructor.
-     * @param bool $useTestUrl
+     *
+     * PesoPayDirectClient accept an array of constructor parameters
+     * and an optional testing environment boolean parameter
+     *
+     * Here's an example of creating a PesoPayDirectClient
+     * using an array of the default parameters.
+     *
+     * First parameter consists of the common parameters
+     *
+     * Second parameter is optional and will activate the debug url if set to true
+     * Otherwise it defaults to false and will use the live url
+     *
+     *     $client = new PesoPayDirectClient([
+     *         'actionType'         => 'Capture',
+     *         'orderRef'           => 1234523,
+     *         'amount'             => 1000,
+     *         'currCode'           => 608,
+     *         'merchantId'         => 18064182,
+     *         'secretCode'         => 'A5PNa2owJZEm20PI2gf0yyg5gAS3toig',
+     *         'pMethod'            => 'CC',
+     *         'payType'            => 'N',
+     *     ], true);
+     *
+     * PesoPayDirectClient configuration settings include the following options:
+     *
      * @param array $params
+     * @param bool $useTestUrl
+     *
      */
     public function __construct(array $params = [], $useTestUrl = false)
     {
