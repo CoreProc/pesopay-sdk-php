@@ -43,6 +43,8 @@ class PesoPayDirectClient
     // @var string The redirect URL when the transaction is canceled.
     private $cancelUrl;
 
+    private $secureHash;
+
     // @var array The name of the properties used in the API
     private $fillables = [
         'actionType',
@@ -321,7 +323,7 @@ class PesoPayDirectClient
 
     private function generateSecureHash()
     {
-        return sha1($this->merchantId . '|' .
+        $this->secureHash = sha1($this->merchantId . '|' .
             $this->orderRef . '|' .
             $this->currCode . '|' .
             $this->amount . '|' .
@@ -329,29 +331,61 @@ class PesoPayDirectClient
             $this->secretCode);
     }
 
-    public function execute()
+//    public function execute()
+//    {
+//        $client = $this->client;
+//
+//        $headers = array(); //TODO: Apply acquisition of headers
+//
+//        $this->generateSecureHash();
+//
+//        $params =
+//            [
+//                'orderRef'   => $this->orderRef,
+//                'amount'     => $this->amount,
+//                'currCode'   => $this->currCode,
+//                'merchantId' => $this->merchantId,
+//                'secureHash' => $this->secureHash,
+//                'payType'    => $this->payType,
+//                'successUrl' => $this->successUrl,
+//                'failUrl'    => $this->failUrl,
+//                'cancelUrl'  => $this->cancelUrl,
+//            ];
+//
+//        return $client->request('POST', $this->apiUrl, array('verify' => false, 'headers' => $headers, 'form_params' => $params));
+//
+//    }
+
+    public function generateHtml()
     {
-        $client = $this->client;
+        $this->generateSecureHash();
 
-        $headers = array(); //TODO: Apply acquisition of headers
+        $orderRefHtml = '<div><input type="text" name="orderRef" value="'.$this->orderRef.'"></div>';
+        $amountHtml = '<div><input type="text" name="amount" value="'.$this->amount.'"></div>';
+        $currCodeHtml = '<div><input type="text" name="currCode" value="'.$this->currCode.'"></div>';
+        $merchantIdHtml = '<div><input type="text" name="merchantId" value="'.$this->merchantId.'"></div>';
+        $secureHashHtml = '<div><input type="text" name="secureHash" value="'.$this->secureHash.'"></div>';
+        $payTypeHtml = '<div><input type="text" name="payType" value="'.$this->payType.'"></div>';
+        $successUrlHtml = '<div><input type="text" name="successUrl" value="'.$this->successUrl.'"></div>';
+        $failUrlHtml = '<div><input type="text" name="failUrl" value="'.$this->failUrl.'"></div>';
+        $cancelUrlHtml = '<div><input type="text" name="cancelUrl" value="'.$this->cancelUrl.'"></div>';
 
-        $secureHash = $this->generateSecureHash();
+        $form = "
+            <form action=\"$this->apiUrl\" method=\"POST\">
+                $orderRefHtml
+                $amountHtml
+                $currCodeHtml
+                $merchantIdHtml
+                $secureHashHtml
+                $payTypeHtml
+                $successUrlHtml
+                $failUrlHtml
+                $cancelUrlHtml
+                <input type='submit' value='submit'>
+            </form>
+        ";
 
-        $params =
-            [
-                'orderRef'   => $this->orderRef,
-                'amount'     => $this->amount,
-                'currCode'   => $this->currCode,
-                'merchantId' => $this->merchantId,
-                'pMethod'    => $this->pMethod,
-                'secureHash' => $secureHash,
-                'payType'    => $this->payType,
-                'successUrl' => $this->successUrl,
-                'failUrl'    => $this->failUrl,
-                'cancelUrl'  => $this->cancelUrl,
-            ];
-
-        return $client->request('POST', $this->apiUrl, array('verify' => false, 'headers' => $headers, 'form_params' => $params));
+        return $form;
 
     }
 
