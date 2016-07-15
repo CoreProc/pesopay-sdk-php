@@ -8,7 +8,7 @@
 
 namespace Coreproc\PesoPay\Sdk;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
 
 class PesoPayMerchantApiClient
 {
@@ -61,7 +61,7 @@ class PesoPayMerchantApiClient
      */
     private function initGuzzleClient()
     {
-        $this->guzzleClient = new Client();
+        $this->guzzleClient = new GuzzleClient();
     }
 
     /**
@@ -226,9 +226,9 @@ class PesoPayMerchantApiClient
     {
         $url = $this->getUrl();
 
-        $formData = [
+        $params = [
             'verify'      => false,
-            'form_params' => [
+            'body' 	  => [
                 'loginId'    => $this->loginId,
                 'password'   => $this->password,
                 'actionType' => $this->actionType,
@@ -239,7 +239,7 @@ class PesoPayMerchantApiClient
             ]
         ];
 
-        $response = $this->guzzleClient->request('POST', $url, $formData);
+        $response = $this->guzzleClient->post($url, $params);
 
         return $response;
     }

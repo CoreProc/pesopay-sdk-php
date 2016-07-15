@@ -2,7 +2,7 @@
 
 namespace Coreproc\PesoPay\Sdk;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
 
 class PesoPayClientPostThrough
 {
@@ -124,7 +124,7 @@ class PesoPayClientPostThrough
      */
     private function initGuzzleClient()
     {
-        $this->client = new Client();
+        $this->client = new GuzzleClient();
     }
 
     /**
