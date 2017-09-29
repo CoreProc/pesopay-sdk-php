@@ -26,7 +26,7 @@ class ResponseCode
 
     private $secondaryDescription;
 
-    public function __construct($primary, $secondary = null)
+    public function __construct($primary, $secondary)
     {
         $this->primary = $primary;
         $this->secondary = $secondary;
@@ -34,7 +34,7 @@ class ResponseCode
         $this->parse();
     }
 
-    public function getDescription()
+    public function getFullDescription()
     {
         return $this->getPrimaryDescription() . ': ' . $this->getSecondaryDescription();
     }
