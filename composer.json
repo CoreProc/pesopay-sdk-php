@@ -13,6 +13,10 @@
     {
       "name": "Daniel Orencio",
       "email": "daniel.orencio@coreproc.ph"
+    },
+    {
+      "name": "Justin de Leon",
+      "email": "justin.deleon@coreproc.ph"
     }
   ],
   "minimum-stability": "dev",
