@@ -22,10 +22,21 @@ class ResponseCode
      */
     private $secondary;
 
+    /**
+     * @var string Primary Description
+     */
     private $primaryDescription;
 
+    /**
+     * @var string Secondary Description
+     */
     private $secondaryDescription;
 
+    /**
+     * ResponseCode constructor.
+     * @param string $primary
+     * @param string $secondary
+     */
     public function __construct($primary, $secondary)
     {
         $this->primary = $primary;
@@ -34,21 +45,34 @@ class ResponseCode
         $this->parse();
     }
 
+    /**
+     * @return string
+     */
     public function getFullDescription()
     {
         return $this->getPrimaryDescription() . ': ' . $this->getSecondaryDescription();
     }
 
+    /**
+     * @return string
+     */
     public function getPrimaryDescription()
     {
         return $this->primaryDescription;
     }
 
+    /**
+     * @return string
+     */
     public function getSecondaryDescription()
     {
         return $this->secondaryDescription;
     }
 
+    /**
+     * Parse response codes and set its description.
+     * @throws InvalidPRCException
+     */
     private function parse()
     {
         switch ($this->primary) {
