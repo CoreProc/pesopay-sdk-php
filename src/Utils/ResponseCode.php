@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: justin
- * Date: 29/09/2017
- * Time: 2:31 PM
- */
 
 namespace Coreproc\PesoPay\Sdk\Utils;
 
@@ -36,6 +30,7 @@ class ResponseCode
      * ResponseCode constructor.
      * @param string $primary
      * @param string $secondary
+     * @throws InvalidPRCException
      */
     public function __construct($primary, $secondary)
     {

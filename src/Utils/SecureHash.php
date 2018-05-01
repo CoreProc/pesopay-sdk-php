@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: justin
- * Date: 29/09/2017
- * Time: 4:14 PM
- */
 
 namespace Coreproc\PesoPay\Sdk\Utils;
 
