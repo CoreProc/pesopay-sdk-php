@@ -88,8 +88,8 @@ class PesoPayClientPostThrough
      *         'merchantId'         => 18064182,
      *         'secretCode'         => 'A5PNa2owJZEm20PI2gf0yyg5gAS3toig',
      *         'payType'            => 'N',
-     *         'successUrl'         => 'http://google.com',
-     *         'failUrl'            => 'http://youtube.com',
+     *         'successUrl'         => 'http://example.com?success',
+     *         'failUrl'            => 'http://example.com?error',
      *         'print'              => 'no',
      *         'redirect'           => 0
      *     ], true);
@@ -106,7 +106,7 @@ class PesoPayClientPostThrough
      */
     public function __construct(array $params = [], $useTestUrl = false)
     {
-        $this->initGuzzleClient();
+        $this->client = new Client();
 
         $this->redirect = 0;
 
@@ -117,14 +117,6 @@ class PesoPayClientPostThrough
         // Assigns testing url when $useTestUrl is true
         $this->apiUrl = $useTestUrl ? 'https://test.pesopay.com/b2cDemo/eng/payment/payForm.jsp' : 'https://www.pesopay.com/b2c2/eng/payment/payForm.jsp';
 
-    }
-
-    /**
-     *
-     */
-    private function initGuzzleClient()
-    {
-        $this->client = new GuzzleClient();
     }
 
     /**

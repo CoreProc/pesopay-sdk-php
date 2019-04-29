@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: daniel
- * Date: 7/11/16
- * Time: 6:39 PM
- */
 
 namespace Coreproc\PesoPay\Sdk;
 
@@ -39,6 +33,13 @@ class PesoPayMerchantApiClient
 
     private $testingUrl;
 
+    /**
+     * PesoPayMerchantApiClient constructor.
+     *
+     * @param null|string $merchantId
+     * @param null|string $loginId
+     * @param null|string $password
+     */
     public function __construct($merchantId = null, $loginId = null, $password = null)
     {
         $this->loginId = $loginId;
@@ -53,15 +54,7 @@ class PesoPayMerchantApiClient
 
         $this->testingUrl = 'https://test.pesopay.com/b2cDemo/eng/merchant/api/orderApi.jsp';
 
-        $this->initGuzzleClient();
-    }
-
-    /**
-     *
-     */
-    private function initGuzzleClient()
-    {
-        $this->guzzleClient = new GuzzleClient();
+        $this->guzzleClient = new Client();
     }
 
     /**
@@ -86,6 +79,7 @@ class PesoPayMerchantApiClient
 
     /**
      * @param string $loginId
+     * @return PesoPayMerchantApiClient
      */
     public function setLoginId($loginId)
     {
@@ -96,6 +90,7 @@ class PesoPayMerchantApiClient
 
     /**
      * @param string $password
+     * @return PesoPayMerchantApiClient
      */
     public function setPassword($password)
     {
@@ -106,6 +101,7 @@ class PesoPayMerchantApiClient
 
     /**
      * @param int $merchantId
+     * @return PesoPayMerchantApiClient
      */
     public function setMerchantId($merchantId)
     {
@@ -117,6 +113,7 @@ class PesoPayMerchantApiClient
     /**
      * @param string $loginId
      * @param string $password
+     * @return PesoPayMerchantApiClient
      */
     public function setCredentials($loginId, $password)
     {
@@ -130,6 +127,7 @@ class PesoPayMerchantApiClient
 
     /**
      * @param string $actionType use const of PesosPayMerchantActionType
+     * @return PesoPayMerchantApiClient
      */
     public function setActionType($actionType)
     {
@@ -140,6 +138,7 @@ class PesoPayMerchantApiClient
 
     /**
      * @param string $orderRef
+     * @return PesoPayMerchantApiClient
      */
     public function setOrderReference($orderRef)
     {
@@ -150,6 +149,7 @@ class PesoPayMerchantApiClient
 
     /**
      * @param string $paymentRef
+     * @return PesoPayMerchantApiClient
      */
     public function setPaymentReference($paymentRef)
     {
@@ -160,6 +160,7 @@ class PesoPayMerchantApiClient
 
     /**
      * @param float $amount
+     * @return PesoPayMerchantApiClient
      */
     public function setAmount($amount)
     {
@@ -170,6 +171,7 @@ class PesoPayMerchantApiClient
 
     /**
      * @param string $startDate
+     * @return PesoPayMerchantApiClient
      */
     public function setStartDate($startDate)
     {
@@ -180,6 +182,7 @@ class PesoPayMerchantApiClient
 
     /**
      * @param string $endDate
+     * @return PesoPayMerchantApiClient
      */
     public function setEndDate($endDate)
     {
@@ -189,7 +192,6 @@ class PesoPayMerchantApiClient
     }
 
     /**
-     * @param $testing
      * @return mixed
      */
     public function getUrl()

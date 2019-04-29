@@ -1,5 +1,6 @@
 {
   "name": "coreproc/pesopay-sdk-php",
+  "description": "Pesopay SDK for PHP",
   "license": "proprietary",
   "authors": [
     {
@@ -13,20 +14,20 @@
     {
       "name": "Daniel Orencio",
       "email": "daniel.orencio@coreproc.ph"
+    },
+    {
+      "name": "Justin de Leon",
+      "email": "justin.deleon@coreproc.ph"
     }
   ],
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.5.9",
-    "guzzlehttp/guzzle": "~5.0",
-    "symfony/psr-http-message-bridge": "0.2"
+    "guzzlehttp/guzzle": "^6.2"
   },
   "autoload": {
     "psr-4": {
       "Coreproc\\PesoPay\\Sdk\\": "src"
     }
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^5.4"
   }
 }
