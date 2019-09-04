@@ -2,10 +2,7 @@
 
 namespace Coreproc\PesoPay\Sdk;
 
-use GuzzleHttp\Client as GuzzleClient;
-
-class PesoPayClientPostThrough
-{
+class PesoPayClientPostThrough {
     // @var string The order reference number
     private $orderRef;
 
@@ -50,6 +47,13 @@ class PesoPayClientPostThrough
 
     //@var int Seconds before redirecting to the fail or success page
     private $redirect;
+
+    private $promotion;
+    private $promotionCode;
+    private $promotionRuleCode;
+    private $payMethod;
+    private $mpsMode;
+    private $remark;
 
     // @var array The name of the properties used in the API
     private $fillables = [
@@ -101,7 +105,7 @@ class PesoPayClientPostThrough
      * PesoPayClientPostThrough configuration settings include the following options:
      *
      * @param array $params
-     * @param bool $useTestUrl
+     * @param bool  $useTestUrl
      *
      */
     public function __construct(array $params = [], $useTestUrl = false)
@@ -157,11 +161,13 @@ class PesoPayClientPostThrough
 
     /**
      * @param $orderRef
+     *
      * @return $this
      */
     public function setOrderReference($orderRef)
     {
         $this->orderRef = $orderRef;
+
         return $this;
     }
 
@@ -175,11 +181,13 @@ class PesoPayClientPostThrough
 
     /**
      * @param $amount
+     *
      * @return $this
      */
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
         return $this;
     }
 
@@ -193,11 +201,13 @@ class PesoPayClientPostThrough
 
     /**
      * @param $currCode
+     *
      * @return $this
      */
     public function setCurrencyCode($currCode)
     {
         $this->currCode = $currCode;
+
         return $this;
     }
 
@@ -211,11 +221,13 @@ class PesoPayClientPostThrough
 
     /**
      * @param $merchantId
+     *
      * @return $this
      */
     public function setMerchantId($merchantId)
     {
         $this->merchantId = $merchantId;
+
         return $this;
     }
 
@@ -229,11 +241,13 @@ class PesoPayClientPostThrough
 
     /**
      * @param $pMethod
+     *
      * @return $this
      */
     public function setPaymentMethod($pMethod)
     {
         $this->pMethod = $pMethod;
+
         return $this;
     }
 
@@ -248,11 +262,13 @@ class PesoPayClientPostThrough
 
     /**
      * @param $secretCode
+     *
      * @return $this
      */
     public function setSecretCode($secretCode)
     {
         $this->secretCode = $secretCode;
+
         return $this;
     }
 
@@ -266,11 +282,13 @@ class PesoPayClientPostThrough
 
     /**
      * @param $payType
+     *
      * @return $this
      */
     public function setPayType($payType)
     {
         $this->payType = $payType;
+
         return $this;
     }
 
@@ -284,11 +302,13 @@ class PesoPayClientPostThrough
 
     /**
      * @param $successUrl
+     *
      * @return $this
      */
     public function setSuccessUrl($successUrl)
     {
         $this->successUrl = $successUrl;
+
         return $this;
     }
 
@@ -302,11 +322,13 @@ class PesoPayClientPostThrough
 
     /**
      * @param $failUrl
+     *
      * @return $this
      */
     public function setFailUrl($failUrl)
     {
         $this->failUrl = $failUrl;
+
         return $this;
     }
 
@@ -320,42 +342,51 @@ class PesoPayClientPostThrough
 
     /**
      * @param $cancelUrl
+     *
      * @return $this
      */
     public function setCancelUrl($cancelUrl)
     {
         $this->cancelUrl = $cancelUrl;
+
         return $this;
     }
 
     private function generateSecureHash()
     {
         $this->secureHash = sha1($this->merchantId . '|' .
-            $this->orderRef . '|' .
-            $this->currCode . '|' .
-            $this->amount . '|' .
-            $this->payType . '|' .
-            $this->secretCode);
+                                 $this->orderRef . '|' .
+                                 $this->currCode . '|' .
+                                 $this->amount . '|' .
+                                 $this->payType . '|' .
+                                 $this->secretCode);
     }
 
-    public function generateHtml($isAutoSubmit=true)
+    public function generateHtml($isAutoSubmit = true)
     {
         $this->generateSecureHash();
 
-        $orderRefHtml   = '<div><input type="text" name="orderRef" value="'.$this->orderRef.'"></div>';
-        $amountHtml     = '<div><input type="text" name="amount" value="'.$this->amount.'"></div>';
-        $currCodeHtml   = '<div><input type="text" name="currCode" value="'.$this->currCode.'"></div>';
-        $merchantIdHtml = '<div><input type="text" name="merchantId" value="'.$this->merchantId.'"></div>';
-        $secureHashHtml = '<div><input type="text" name="secureHash" value="'.$this->secureHash.'"></div>';
-        $payTypeHtml    = '<div><input type="text" name="payType" value="'.$this->payType.'"></div>';
-        $successUrlHtml = '<div><input type="text" name="successUrl" value="'.$this->successUrl.'"></div>';
-        $failUrlHtml    = '<div><input type="text" name="failUrl" value="'.$this->failUrl.'"></div>';
-        $cancelUrlHtml  = '<div><input type="text" name="cancelUrl" value="'.$this->cancelUrl.'"></div>';
-        $needPrintHtml  = '<div><input type="text" name="print" value="'.$this->print.'"></div>';
-        $redirectHtml   = '<div><input type="text" name="redirect" value="'.$this->redirect.'"></div>';
+        $orderRefHtml          = '<div><input type="text" name="orderRef" value="' . $this->orderRef . '"></div>';
+        $amountHtml            = '<div><input type="text" name="amount" value="' . $this->amount . '"></div>';
+        $currCodeHtml          = '<div><input type="text" name="currCode" value="' . $this->currCode . '"></div>';
+        $merchantIdHtml        = '<div><input type="text" name="merchantId" value="' . $this->merchantId . '"></div>';
+        $secureHashHtml        = '<div><input type="text" name="secureHash" value="' . $this->secureHash . '"></div>';
+        $payTypeHtml           = '<div><input type="text" name="payType" value="' . $this->payType . '"></div>';
+        $successUrlHtml        = '<div><input type="text" name="successUrl" value="' . $this->successUrl . '"></div>';
+        $failUrlHtml           = '<div><input type="text" name="failUrl" value="' . $this->failUrl . '"></div>';
+        $cancelUrlHtml         = '<div><input type="text" name="cancelUrl" value="' . $this->cancelUrl . '"></div>';
+        $needPrintHtml         = '<div><input type="text" name="print" value="' . $this->print . '"></div>';
+        $redirectHtml          = '<div><input type="text" name="redirect" value="' . $this->redirect . '"></div>';
+        $promotionHtml         = '<div><input type="text" name="promotion" value="' . $this->promotion . '"></div>';
+        $promotionCodeHtml     = '<div><input type="text" name="promotionCode" value="' . $this->promotionCode . '"></div>';
+        $promotionRuleCodeHtml = '<div><input type="text" name="promotionRuleCode" value="' . $this->promotionRuleCode . '"></div>';
+        $payMethodHtml         = '<div><input type="text" name="payMethod" value="' . $this->payMethod . '"></div>';
+        $remarkHtml            = '<div><input type="text" name="remark" value="' . $this->remark . '"></div>';
+        $mpsModeHtml           = '<div><input type="text" name="mpsMode" value="' . $this->mpsMode . '"></div>';
+
 
         $hidden = $isAutoSubmit ? 'hidden' : "";
-        $form = "
+        $form   = "
             <div $hidden>
                 <form id= \"pesopay-client-form\" action=\"$this->apiUrl\" method=\"POST\">
                     $orderRefHtml
@@ -369,12 +400,19 @@ class PesoPayClientPostThrough
                     $cancelUrlHtml
                     $needPrintHtml
                     $redirectHtml
+                    $promotionHtml
+                    $promotionCodeHtml
+                    $promotionRuleCodeHtml
+                    $payMethodHtml
+                    $remarkHtml
+                    $mpsModeHtml
                     <input type='submit' value='submit'>
                 </form>
             </div>
         ";
 
-        $finalForm = ($isAutoSubmit) ? $form.$this->generateAutoSubmit() : $form;
+        $finalForm = ($isAutoSubmit) ? $form . $this->generateAutoSubmit() : $form;
+
         return $finalForm;
 
     }
