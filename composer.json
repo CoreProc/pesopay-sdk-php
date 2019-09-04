@@ -1,7 +1,7 @@
 {
   "name": "coreproc/pesopay-sdk-php",
   "description": "Pesopay SDK for PHP",
-  "license": "gpl",
+  "license": "MIT",
   "authors": [
     {
       "name": "Prince John Lansang",
