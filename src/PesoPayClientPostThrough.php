@@ -2,6 +2,8 @@
 
 namespace Coreproc\PesoPay\Sdk;
 
+use GuzzleHttp\Client as GuzzleClient;
+
 class PesoPayClientPostThrough {
     // @var string The order reference number
     private $orderRef;
@@ -110,7 +112,7 @@ class PesoPayClientPostThrough {
      */
     public function __construct(array $params = [], $useTestUrl = false)
     {
-        $this->client = new Client();
+        $this->client = new GuzzleClient();
 
         $this->redirect = 0;
 
