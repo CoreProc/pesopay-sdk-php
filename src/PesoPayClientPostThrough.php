@@ -69,7 +69,13 @@ class PesoPayClientPostThrough {
         'failUrl',
         'cancelUrl',
         'print',
-        'redirect'
+        'redirect',
+        'promotion',
+        'promotionCode',
+        'promotionRuleCode',
+        'payMethod',
+        'mpsMode',
+        'remark'
     ];
 
 
